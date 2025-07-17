@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Lobbies - PUB Stomp Elite</title>
+    <meta name="robots" content="noindex">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --accent: #27ae60;
+            --bg: #f4f8fb;
+            --card: #fff;
+            --text: #222;
+            --muted: #6c757d;
+            --shadow: 0 4px 24px rgba(30, 64, 175, 0.08);
+        }
+        html, body { height: 100%; margin: 0; padding: 0; }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(120deg, #e3f0ff 0%, #f4f8fb 100%);
+            color: var(--text);
+            font-family: 'Roboto', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+        .navbar {
+            background: var(--primary);
+            color: #fff;
+            padding: 0.7rem 0;
+            box-shadow: 0 2px 8px rgba(30, 64, 175, 0.07);
+        }
+        .navbar-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+        }
+        .site-logo {
+            display: flex;
+            align-items: center;
+            font-family: 'Orbitron', Arial, sans-serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .site-logo-icon {
+            font-size: 2.2rem;
+            margin-right: 0.5rem;
+        }
+        .navbar-links a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .navbar-links a:hover {
+            color: #cbe3ff;
+        }
+        .container { max-width: 1100px; margin: 4vh auto; background: #fff; border-radius: 16px; box-shadow: var(--shadow); padding: 2.5rem 2rem; }
+        h2 { margin-top: 0; font-weight: 700; }
+        a.home-link { display: inline-block; margin-bottom: 1.2rem; color: #1a73e8; font-weight: 500; text-decoration: underline; }
+        a.home-link:hover { color: #1558b0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { padding: 0.6rem 0.5rem; border: 1px solid #e1e4e8; text-align: left; }
+        th { background: #f0f4f8; font-weight: 700; }
+        tr:nth-child(even) { background: #f9fbfd; }
+        .empty { color: #888; text-align: center; margin: 2rem 0; font-size: 1.1rem; }
+        @media (max-width: 1100px) { .navbar-inner { max-width: 98vw; } }
+        @media (max-width: 900px) { .container { padding: 1.5rem 0.5rem; } table, th, td { font-size: 0.95em; } .navbar-inner { flex-direction: column; align-items: flex-start; padding: 1.5rem 1rem; } }
+        @media (max-width: 600px) { .container { padding: 0.5rem 0.2rem; } table, th, td { font-size: 0.85em; } }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <div class="site-logo">
+                <span class="site-logo-icon">🏒</span>
+                PUB Stomp Elite
+            </div>
+            <div class="navbar-links">
+                <a href="/">Home</a>
+                <a href="/lobbies">Lobbies</a>
+                <a href="/docs">Docs</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h2>All Lobbies</h2>
+        {% if lobbies and lobbies|length > 0 %}
+        <div style="overflow-x:auto;">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Code</th>
+                <th>Creator</th>
+                <th>Wager (cents)</th>
+                <th>Team 1</th>
+                <th>Team 2</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th>Club ID</th>
+                <th>Start Time</th>
+            </tr>
+            {% for l in lobbies %}
+            <tr>
+                <td>{{ l[0] }}</td>
+                <td>{{ l[1] }}</td>
+                <td>{{ l[2] }}</td>
+                <td>{{ l[3] }}</td>
+                <td>{{ l[4] }}</td>
+                <td>{{ l[5] }}</td>
+                <td>{{ l[6] }}</td>
+                <td>{{ l[7] }}</td>
+                <td>{{ l[8] }}</td>
+                <td>{{ l[9] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        </div>
+        {% else %}
+        <div class="empty">No lobbies found at the moment. Check back soon!</div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,314 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUB Stomp Elite - NHL25 Wager Bot</title>
+    <meta name="robots" content="noindex">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --accent: #27ae60;
+            --bg: #f4f8fb;
+            --card: #fff;
+            --text: #222;
+            --muted: #6c757d;
+            --shadow: 0 4px 24px rgba(30, 64, 175, 0.08);
+        }
+        html, body { height: 100%; margin: 0; padding: 0; }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(120deg, #e3f0ff 0%, #f4f8fb 100%);
+            color: var(--text);
+            font-family: 'Roboto', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+        .navbar {
+            background: var(--primary);
+            color: #fff;
+            padding: 0.7rem 0;
+            box-shadow: 0 2px 8px rgba(30, 64, 175, 0.07);
+        }
+        .navbar-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+        }
+        .site-logo {
+            display: flex;
+            align-items: center;
+            font-family: 'Orbitron', Arial, sans-serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .site-logo-icon {
+            font-size: 2.2rem;
+            margin-right: 0.5rem;
+        }
+        .navbar-links a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .navbar-links a:hover {
+            color: #cbe3ff;
+        }
+        .hero {
+            background: linear-gradient(120deg, #fff 60%, #e3f0ff 100%);
+            box-shadow: var(--shadow);
+            border-radius: 0 0 32px 32px;
+            padding: 3.5rem 2rem 2.5rem 2rem;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            animation: fadeInDown 1.1s cubic-bezier(.39,.58,.57,1) 0.1s both;
+        }
+        .hero h1 {
+            font-family: 'Orbitron', Arial, sans-serif;
+            font-size: 3.1rem;
+            font-weight: 900;
+            margin: 0 0 1.1rem 0;
+            color: var(--primary);
+            letter-spacing: 2px;
+        }
+        .hero p {
+            font-size: 1.3rem;
+            margin: 0 0 2.2rem 0;
+            color: var(--muted);
+        }
+        .cta {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            padding: 1.1rem 2.7rem;
+            border-radius: 12px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(39, 174, 96, 0.13);
+            transition: background 0.2s, transform 0.2s;
+            margin-top: 1.2rem;
+        }
+        .cta:hover {
+            background: #219150;
+            transform: translateY(-2px) scale(1.03);
+        }
+        .features {
+            max-width: 1100px;
+            margin: 3.5rem auto 2.5rem auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.2rem;
+            justify-content: center;
+        }
+        .feature {
+            background: var(--card);
+            border-radius: 18px;
+            box-shadow: 0 2px 14px rgba(30, 64, 175, 0.07);
+            padding: 2.2rem 1.7rem 1.7rem 1.7rem;
+            flex: 1 1 260px;
+            min-width: 260px;
+            max-width: 320px;
+            text-align: center;
+            transition: transform 0.18s, box-shadow 0.18s;
+        }
+        .feature:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 8px 32px rgba(30, 64, 175, 0.13);
+        }
+        .feature h3 {
+            color: var(--primary);
+            margin-top: 0.5rem;
+            font-size: 1.25rem;
+        }
+        .feature .icon {
+            font-size: 2.7rem;
+            margin-bottom: 0.7rem;
+        }
+        .about {
+            max-width: 900px;
+            margin: 2.5rem auto 0 auto;
+            background: var(--card);
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(30, 64, 175, 0.06);
+            padding: 2.2rem 2rem 1.2rem 2rem;
+            font-size: 1.13rem;
+            color: var(--text);
+            animation: fadeInUp 1.2s cubic-bezier(.39,.58,.57,1) 0.2s both;
+        }
+        .about ul {
+            margin: 1.2rem 0 0 0;
+            padding-left: 1.2rem;
+        }
+        .about li {
+            margin-bottom: 0.7rem;
+            font-size: 1.08rem;
+        }
+        .howto {
+            max-width: 900px;
+            margin: 2.5rem auto 0 auto;
+            background: var(--card);
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(30, 64, 175, 0.06);
+            padding: 2rem 2rem 1.2rem 2rem;
+            font-size: 1.13rem;
+            color: var(--text);
+            animation: fadeInUp 1.2s cubic-bezier(.39,.58,.57,1) 0.3s both;
+        }
+        .howto h3 { margin-top: 0; color: var(--primary); }
+        .howto ol { margin: 1.1rem 0 0 1.2rem; }
+        .howto li { margin-bottom: 0.7rem; }
+        .join {
+            text-align: center;
+            margin: 3.5rem 0 2.5rem 0;
+            animation: fadeInUp 1.2s cubic-bezier(.39,.58,.57,1) 0.4s both;
+        }
+        .join a {
+            background: var(--primary);
+            color: #fff;
+            padding: 1.1rem 2.7rem;
+            border-radius: 12px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(30, 64, 175, 0.13);
+            transition: background 0.2s, transform 0.2s;
+        }
+        .join a:hover {
+            background: #1558b0;
+            transform: translateY(-2px) scale(1.03);
+        }
+        footer {
+            text-align: center;
+            color: #888;
+            font-size: 1rem;
+            margin: 2.5rem 0 1.2rem 0;
+        }
+        @media (max-width: 1100px) { .navbar-inner, .features { max-width: 98vw; } }
+        @media (max-width: 900px) { .features { flex-direction: column; align-items: center; } }
+        @media (max-width: 600px) {
+            .hero { padding: 2rem 0.5rem 1.5rem 0.5rem; }
+            .features { gap: 1rem; }
+            .about, .howto { padding: 1.2rem 0.5rem 0.7rem 0.5rem; }
+        }
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-40px); }
+            100% { opacity: 1; transform: none; }
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <div class="site-logo">
+                <span class="site-logo-icon">🏒</span>
+                PUB Stomp Elite
+            </div>
+            <div class="navbar-links">
+                <a href="#features">Features</a>
+                <a href="#howto">How It Works</a>
+                <a href="#join">Join</a>
+                <a href="/lobbies">Lobbies</a>
+                <a href="/docs">Docs</a>
+            </div>
+        </div>
+    </nav>
+    <section class="hero">
+        <h1>Welcome to PUB Stomp Elite</h1>
+        <p>Challenge the best, win real rewards, and track your progress in the most advanced NHL25 wager community.<br>
+        <b>Automated, secure, and built for serious competitors and casual players alike.</b></p>
+        <a href="https://discord.gg/7GPArgK9" class="cta">Get Started</a>
+        <br><br>
+        <a href="/lobbies" class="cta" style="background:#1a73e8; margin-top:0.7rem;">View Lobbies</a>
+    </section>
+    <section class="about">
+        <strong>PUB Stomp Elite</strong> is your all-in-one hub for NHL25 online competition. Our Discord bot lets you create and join wager matches, manage your wallet, and view live stats—all from your server. With secure PayPal integration, instant payouts, and a transparent match history, you can focus on the game while we handle the rest.<br><br>
+        <ul>
+            <li>🏒 <b>Wager Matches:</b> Set up or join matches with real stakes, instantly and safely.</li>
+            <li>💰 <b>Wallet Management:</b> Deposit and withdraw funds with PayPal, track your balance in real time.</li>
+            <li>📈 <b>Stats & Leaderboards:</b> Analyze your club's performance, view detailed match breakdowns, and climb the ranks.</li>
+            <li>🤝 <b>Community Events:</b> Join tournaments, special events, and connect with top NHL25 players.</li>
+        </ul>
+    </section>
+    <section class="features" id="features">
+        <div class="feature">
+            <div class="icon">🤖</div>
+            <h3>Discord Bot Integration</h3>
+            <p>Manage wagers, stats, and payouts directly from Discord. Simple commands, instant feedback, and 24/7 uptime.</p>
+        </div>
+        <div class="feature">
+            <div class="icon">💸</div>
+            <h3>Secure PayPal Payments</h3>
+            <p>Deposit and withdraw funds safely using PayPal. Automated wallet management and instant payouts for winners.</p>
+        </div>
+        <div class="feature">
+            <div class="icon">📊</div>
+            <h3>Live Stats & Match History</h3>
+            <p>Track your club's performance, view detailed match stats, and analyze your progress with our advanced stats dashboard.</p>
+        </div>
+        <div class="feature">
+            <div class="icon">🏆</div>
+            <h3>Fair & Transparent Wagering</h3>
+            <p>All matches are logged and verified. Enjoy a fair, competitive environment with full transparency for every wager.</p>
+        </div>
+        <div class="feature">
+            <div class="icon">🎉</div>
+            <h3>Events & Tournaments</h3>
+            <p>Participate in regular events, win prizes, and make your mark in the PUB Stomp Elite community.</p>
+        </div>
+    </section>
+    <section class="howto" id="howto">
+        <h3>How It Works</h3>
+        <ol>
+            <li><b>Join our Discord server</b> (link below) and verify your account.</li>
+            <li><b>Use the bot</b> to create or join wager matches, deposit funds, and check your stats.</li>
+            <li><b>Play your match</b>—results are tracked automatically and winners are paid out instantly.</li>
+            <li><b>Climb the leaderboards</b> and participate in special events for extra rewards!</li>
+        </ol>
+    </section>
+    <section class="join" id="join">
+        <h2>Ready to Play?</h2>
+        <p>Join our Discord server to get started, meet other players, and never miss a match!</p>
+        <a href="https://discord.gg/YOUR_INVITE_LINK" target="_blank">Join Our Discord</a>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="about" style="margin-top:2.5rem;">
+        <h3 style="color:var(--primary);margin-top:0;">Frequently Asked Questions</h3>
+        <div>
+            <ul style="list-style: none; padding: 0;">
+                {% for faq in faqs %}
+                <li style="margin-bottom:1.2rem;">
+                    <b>Q: {{ faq.q }}</b><br>
+                    <span style="color:var(--muted);">A: {{ faq.a }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+
+    <!-- Testimony Section -->
+    <section class="about" style="margin-top:1.5rem; background: #e3f0ff; border: 1px solid #cbe3ff;">
+        <h3 style="color:var(--primary);margin-top:0;">What Our Users Say</h3>
+        <blockquote style="font-size:1.15rem; color:#222; font-style:italic; margin:0;">“{{ random_testimony }}”</blockquote>
+    </section>
+
+    <footer>
+        &copy; 2025 PUB Stomp Elite. All rights reserved. | Not affiliated with EA Sports or the NHL.
+    </footer>
+    <!-- Hidden admin link for staff only -->
+    <a href="/admin/login" style="display:none;">Admin</a>
+</body>
+</html>

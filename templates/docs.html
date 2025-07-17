@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - PUB Stomp Elite</title>
+    <meta name="robots" content="noindex">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --accent: #27ae60;
+            --bg: #f4f8fb;
+            --card: #fff;
+            --text: #222;
+            --muted: #6c757d;
+            --shadow: 0 4px 24px rgba(30, 64, 175, 0.08);
+        }
+        html, body { height: 100%; margin: 0; padding: 0; }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(120deg, #e3f0ff 0%, #f4f8fb 100%);
+            color: var(--text);
+            font-family: 'Roboto', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+        .navbar {
+            background: var(--primary);
+            color: #fff;
+            padding: 0.7rem 0;
+            box-shadow: 0 2px 8px rgba(30, 64, 175, 0.07);
+        }
+        .navbar-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+        }
+        .site-logo {
+            display: flex;
+            align-items: center;
+            font-family: 'Orbitron', Arial, sans-serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .site-logo-icon {
+            font-size: 2.2rem;
+            margin-right: 0.5rem;
+        }
+        .navbar-links a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .navbar-links a:hover {
+            color: #cbe3ff;
+        }
+        .container { max-width: 900px; margin: 4vh auto; background: #fff; border-radius: 16px; box-shadow: var(--shadow); padding: 2.5rem 2rem; }
+        h2 { margin-top: 0; font-weight: 700; }
+        .cmd-table { width: 100%; border-collapse: collapse; margin: 2rem 0; }
+        .cmd-table th, .cmd-table td { padding: 0.7rem 0.5rem; border: 1px solid #e1e4e8; text-align: left; }
+        .cmd-table th { background: #f0f4f8; font-weight: 700; }
+        .cmd-table tr:nth-child(even) { background: #f9fbfd; }
+        @media (max-width: 900px) { .container { padding: 1.5rem 0.5rem; } .cmd-table, .cmd-table th, .cmd-table td { font-size: 0.95em; } .navbar-inner { flex-direction: column; align-items: flex-start; padding: 1.5rem 1rem; } }
+        @media (max-width: 600px) { .container { padding: 0.5rem 0.2rem; } .cmd-table, .cmd-table th, .cmd-table td { font-size: 0.85em; } }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <div class="site-logo">
+                <span class="site-logo-icon">🏒</span>
+                PUB Stomp Elite
+            </div>
+            <div class="navbar-links">
+                <a href="/">Home</a>
+                <a href="/lobbies">Lobbies</a>
+                <a href="/docs">Docs</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h2>Bot Commands Documentation</h2>
+        <p>Below are all available commands for the PUB Stomp Elite Discord bot, with descriptions and usage examples.</p>
+        <table class="cmd-table">
+            <tr><th>Command</th><th>Description</th></tr>
+            <tr><td><b>/create_lobby [wager] [club_id]</b></td><td>Create a new 6v6 wager lobby. You are auto-added to Team 1 and must have enough funds in your wallet.</td></tr>
+            <tr><td><b>/join [lobby_code] [team1|team2]</b></td><td>Join a team in a lobby. Wallet is checked and debited for the wager amount.</td></tr>
+            <tr><td><b>/leave [lobby_code]</b></td><td>Leave a lobby before game start for a full refund. After start, leaving forfeits your wager.</td></tr>
+            <tr><td><b>/start_game [lobby_code]</b></td><td>Lock teams and start the game (creator only, both teams must have 6 members).</td></tr>
+            <tr><td><b>/cancel [lobby_code]</b></td><td>Cancel a lobby (creator only, refunds all players).</td></tr>
+            <tr><td><b>/report_result [lobby_code]</b></td><td>Validate the result using the EA API and automatically pay out winners.</td></tr>
+            <tr><td><b>/lobbies</b></td><td>List all open lobbies you can join.</td></tr>
+            <tr><td><b>/view_lobby [lobby_code]</b></td><td>View members in each team for a specific lobby.</td></tr>
+            <tr><td><b>/deposit [amount]</b></td><td>Deposit money into your wallet using PayPal. You will receive a payment link.</td></tr>
+            <tr><td><b>/withdraw [amount] [paypal_email]</b></td><td>Withdraw money from your wallet. Direct PayPal payout. If you have saved your PayPal email, you can omit it.</td></tr>
+            <tr><td><b>/earnings</b></td><td>Show your wallet balance.</td></tr>
+            <tr><td><b>/transactions</b></td><td>List your transaction history.</td></tr>
+            <tr><td><b>/stats_list [club_id]</b></td><td>Show a numbered list of recent matches for a club, with a summary for each.</td></tr>
+            <tr><td><b>/show_stats [club_id] [match_number]</b></td><td>Show detailed stats for both teams and all players for the selected match from the list.</td></tr>
+        </table>
+        <p>For more help, use <b>/help</b> in Discord or contact an admin.</p>
+    </div>
+</body>
+</html>

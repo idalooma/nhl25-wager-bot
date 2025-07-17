@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - PUB Stomp Elite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body { background: #f4f8fb; color: #222; font-family: 'Roboto', Arial, sans-serif; margin: 0; padding: 0; }
+        .container { max-width: 400px; margin: 8vh auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px rgba(30,64,175,0.08); padding: 2.5rem 2rem; }
+        h2 { margin-top: 0; font-family: 'Orbitron', Arial, sans-serif; color: #1a73e8; font-size: 2rem; }
+        form { display: flex; flex-direction: column; gap: 1.2rem; }
+        input[type="password"] { padding: 0.8rem; border: 1px solid #e1e4e8; border-radius: 8px; font-size: 1.1rem; }
+        input[type="submit"] { background: #1a73e8; color: #fff; border: none; border-radius: 8px; padding: 0.8rem; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+        input[type="submit"]:hover { background: #155ab6; }
+        .error { color: #e53935; margin-bottom: 1rem; text-align: center; }
+        .brand { text-align: center; margin-bottom: 2rem; font-family: 'Orbitron', Arial, sans-serif; font-size: 1.3rem; letter-spacing: 2px; color: #1a73e8; }
+        @media (max-width: 600px) { .container { padding: 1.2rem 0.3rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="brand">PUB Stomp Elite</div>
+        <h2>Admin Login</h2>
+        {% if error %}<div class="error">{{ error }}</div>{% endif %}
+        <form method="post">
+            <input type="password" name="password" placeholder="Password" required />
+            <input type="submit" value="Login" />
+        </form>
+        <div style="margin-top:2rem;text-align:center;">
+            <a href="/" style="color:#1a73e8;text-decoration:none;font-size:1rem;">&larr; Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
