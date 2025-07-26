@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User</title>
+    <meta name="robots" content="noindex">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { background: #f7fafd; color: #222; font-family: 'Roboto', sans-serif; margin: 0; padding: 0; }
+        .container { max-width: 400px; margin: 8vh auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); padding: 2.5rem 2rem; }
+        h2 { margin-top: 0; font-weight: 700; text-align: center; }
+        form { display: flex; flex-direction: column; gap: 1.2rem; }
+        label { font-weight: 500; }
+        input[type="text"], input[type="number"] { width: 100%; padding: 0.6rem; border-radius: 6px; border: 1px solid #d1d5db; font-size: 1rem; }
+        button { background: #2980b9; color: #fff; padding: 0.7rem 0; border: none; border-radius: 8px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: background 0.2s; }
+        button:hover { background: #1c5d8c; }
+        a { display: block; text-align: center; margin-top: 1.5rem; color: #2980b9; text-decoration: none; font-weight: 500; }
+        a:hover { text-decoration: underline; }
+        @media (max-width: 500px) { .container { padding: 1.5rem 0.5rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Edit User</h2>
+        <form method="post">
+            <label>Username:
+                <input type="text" name="username" value="{{ user[2] }}" required>
+            </label>
+            <label>Wallet (cents):
+                <input type="number" name="wallet_cents" value="{{ user[3] }}" required>
+            </label>
+            <label>PayPal Agreement:
+                <input type="text" name="paypal_agreement_id" value="{{ user[4] or '' }}">
+            </label>
+            <button type="submit">Save</button>
+        </form>
+        <a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+    </div>
+</body>
+</html>

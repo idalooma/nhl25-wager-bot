@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUB Stomp Elite - Admin Dashboard</title>
+    <meta name="robots" content="noindex">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body { background: #f7fafd; color: #222; font-family: 'Roboto', Arial, sans-serif; margin: 0; padding: 0; }
+        .container { max-width: 1200px; margin: 4vh auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); padding: 2.5rem 2rem; }
+        .brand { font-family: 'Orbitron', Arial, sans-serif; font-size: 1.5rem; font-weight: 700; color: #1a73e8; margin-bottom: 1.2rem; letter-spacing: 1px; }
+        .home-link { display: inline-block; margin-bottom: 1.2rem; color: #1a73e8; font-weight: 500; text-decoration: underline; }
+        .home-link:hover { color: #1558b0; }
+        h2 { margin-top: 0; font-weight: 700; }
+        a, button { color: #2980b9; text-decoration: none; font-weight: 500; }
+        a.button, button { display: inline-block; background: #2980b9; color: #fff; padding: 0.5rem 1.5rem; border-radius: 8px; margin: 0.5rem 0; font-weight: 700; border: none; cursor: pointer; transition: background 0.2s; }
+        a.button:hover, button:hover { background: #1c5d8c; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { padding: 0.6rem 0.5rem; border: 1px solid #e1e4e8; text-align: left; }
+        th { background: #f0f4f8; font-weight: 700; }
+        tr:nth-child(even) { background: #f9fbfd; }
+        .actions { white-space: nowrap; }
+        @media (max-width: 900px) { .container { padding: 1.5rem 0.5rem; } table, th, td { font-size: 0.95em; } }
+        @media (max-width: 600px) { .container { padding: 0.5rem 0.2rem; } table, th, td { font-size: 0.85em; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="brand">PUB Stomp Elite</div>
+        <a href="/" class="home-link">← Back to Home</a>
+        <h2>Admin Dashboard</h2>
+        <a href="{{ url_for('admin_logout') }}" class="button">Logout</a>
+        <form action="{{ url_for('admin_clear_all_data') }}" method="post" style="margin:20px 0;display:inline-block;">
+            <button type="submit" onclick="return confirm('Are you sure you want to clear ALL data? This cannot be undone!');">Clear ALL Data</button>
+        </form>
+        <h3>Users</h3>
+        <div style="overflow-x:auto;">
+        <table><tr><th>ID</th><th>Discord ID</th><th>Username</th><th>Wallet (cents)</th><th>PayPal Agreement</th><th>PayPal Email</th><th>Actions</th></tr>
+        {% for u in users %}<tr>
+        {% for v in u %}<td>{{ v }}</td>{% endfor %}
+        <td class="actions">
+        <a href="{{ url_for('admin_edit_user', user_id=u[0]) }}" class="button">Edit</a>
+        <form action="{{ url_for('admin_delete_user', user_id=u[0]) }}" method="post" style="display:inline" onsubmit="return confirm('Delete user?');">
+        <button type="submit">Delete</button>
+        </form>
+        </td>
+        </tr>{% endfor %}
+        </table>
+        </div>
+        <h3>Lobbies</h3>
+        <div style="overflow-x:auto;">
+        <table><tr><th>ID</th><th>Code</th><th>Creator</th><th>Wager (cents)</th><th>Team1</th><th>Team2</th><th>Status</th><th>Created</th><th>Club ID</th><th>Start Time</th></tr>
+        {% for l in lobbies %}<tr>{% for v in l %}<td>{{ v }}</td>{% endfor %}</tr>{% endfor %}
+        </table>
+        </div>
+        <h3>Transactions</h3>
+        <div style="overflow-x:auto;">
+        <table><tr><th>ID</th><th>User ID</th><th>Type</th><th>Amount (cents)</th><th>Timestamp</th><th>Lobby ID</th></tr>
+        {% for t in transactions %}<tr>{% for v in t %}<td>{{ v }}</td>{% endfor %}</tr>{% endfor %}
+        </table>
+        </div>
+        <h3>Stats</h3>
+        <div style="overflow-x:auto;">
+        <table><tr><th>ID</th><th>User ID</th><th>Games</th><th>Wins</th><th>Losses</th><th>Earnings (cents)</th><th>Goals</th><th>Assists</th></tr>
+        {% for s in stats %}<tr>{% for v in s %}<td>{{ v }}</td>{% endfor %}</tr>{% endfor %}
+        </table>
+        </div>
+
+        <h3>Pending Withdrawals</h3>
+        <div style="overflow-x:auto;">
+        <table><tr><th>ID</th><th>User ID</th><th>Discord ID</th><th>Email</th><th>Amount (cents)</th><th>Status</th><th>Requested At</th><th>Actions</th></tr>
+        {% for w in pending_withdrawals %}<tr>
+            <td>{{ w[0] }}</td>
+            <td>{{ w[1] }}</td>
+            <td>{{ w[2] }}</td>
+            <td>{{ w[3] }}</td>
+            <td>{{ w[4] }}</td>
+            <td>{{ w[5] }}</td>
+            <td>{{ w[6] }}</td>
+            <td class="actions">
+                <form action="{{ url_for('admin_mark_withdrawal_paid', withdrawal_id=w[0]) }}" method="post" style="display:inline" onsubmit="return confirm('Mark withdrawal as paid?');">
+                    <button type="submit">Mark as Paid</button>
+                </form>
+            </td>
+        </tr>{% endfor %}
+        </table>
+        </div>
+    </div>
+</body>
+</html>
